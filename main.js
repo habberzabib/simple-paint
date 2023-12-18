@@ -8,7 +8,7 @@ cnv.height = 400;
 
 //Global Variables
 let mousePressed = false;
-let mouseX, mouseY;
+let mouseX, mouseY, pMouseX, pMouseY;
 let size = 5;
 let penColor = "black";
 
@@ -19,10 +19,17 @@ function loop() {
 
   //Draw circle if mousePressed
   if (mousePressed) {
-    ctx.fillStyle = penColor;
+    // ctx.fillStyle = penColor;
+    // ctx.beginPath();
+    // ctx.arc(mouseX, mouseY, size, 0, 2 * Math.PI);
+    // ctx.fill();
+    ctx.strokeStyle = penColor;
+    ctx.lineCap = "round";
+    ctx.lineWidth = size;
     ctx.beginPath();
-    ctx.arc(mouseX, mouseY, size, 0, 2 * Math.PI);
-    ctx.fill();
+    ctx.moveTo(pMouseX, pMouseY);
+    ctx.lineTo(mouseX, mouseY);
+    ctx.stroke();
   }
 
   requestAnimationFrame(loop);
@@ -43,6 +50,9 @@ function mouseupHandler() {
 }
 
 function mousemoveHandler(event) {
+  pMouseX = mouseX;
+  pMouseY = mouseY;
+
   let cnvRect = cnv.getBoundingClientRect();
   mouseX = event.x - cnvRect.x;
   mouseY = event.y - cnvRect.y;
@@ -55,7 +65,7 @@ function keydownHandler(event) {
     ctx.fillRect(0, 0, cnv.width, cnv.height);
   } else if (event.code == "ArrowUp") {
     size++;
-  } else if (event.code == "ArrowDown") {
+  } else if (event.code == "ArrowDown" && size > 2) {
     size--;
   } else if (event.code == "Digit1") {
     penColor = "red";
@@ -78,4 +88,48 @@ function keydownHandler(event) {
   } else if (event.code == "Digit0") {
     penColor = "white";
   }
+}
+
+//Btn Events
+document.getElementById("red").addEventListener("click", setRed);
+document.getElementById("orange").addEventListener("click", setOrange);
+document.getElementById("yellow").addEventListener("click", setYellow);
+document.getElementById("green").addEventListener("click", setGreen);
+document.getElementById("blue").addEventListener("click", setBlue);
+document.getElementById("purple").addEventListener("click", setPurple);
+document.getElementById("pink").addEventListener("click", setPink);
+document.getElementById("brown").addEventListener("click", setBrown);
+document.getElementById("black").addEventListener("click", setBlack);
+document.getElementById("erase").addEventListener("click", setErase);
+
+function setRed() {
+  penColor = "red";
+}
+
+function setOrange() {
+  penColor = "orange";
+}
+function setYellow() {
+  penColor = "yellow";
+}
+function setGreen() {
+  penColor = "green";
+}
+function setBlue() {
+  penColor = "blue";
+}
+function setPurple() {
+  penColor = "purple";
+}
+function setPink() {
+  penColor = "pink";
+}
+function setBrown() {
+  penColor = "brown";
+}
+function setBlack() {
+  penColor = "black";
+}
+function setErase() {
+  penColor = "white";
 }
