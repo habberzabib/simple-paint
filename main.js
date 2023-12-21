@@ -90,7 +90,7 @@ function keydownHandler(event) {
   }
 }
 
-//Btn Events
+//Color Events
 document.getElementById("red").addEventListener("click", setRed);
 document.getElementById("orange").addEventListener("click", setOrange);
 document.getElementById("yellow").addEventListener("click", setYellow);
@@ -101,6 +101,7 @@ document.getElementById("pink").addEventListener("click", setPink);
 document.getElementById("brown").addEventListener("click", setBrown);
 document.getElementById("black").addEventListener("click", setBlack);
 document.getElementById("erase").addEventListener("click", setErase);
+document.getElementById("colorPicker").addEventListener("change", changeColor);
 
 function setRed() {
   penColor = "red";
@@ -132,4 +133,8 @@ function setBlack() {
 }
 function setErase() {
   penColor = "white";
+}
+
+function changeColor() {
+  let penColor = document.getElementById("colorPicker").value;
 }
